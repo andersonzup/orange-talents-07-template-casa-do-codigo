@@ -1,5 +1,7 @@
 package br.com.zup.casadocodigo.entity;
 
+import br.com.zup.casadocodigo.dto.annotation.EmailIsDuplicated;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -9,17 +11,15 @@ public class Autor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+
     @Column(nullable = false)
     private String nome;
 
-    @NotBlank
-    @Email
+
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotNull
-    @Size(max = 400)
+
     @Column(nullable = false, length = 400)
     private String descricao;
 

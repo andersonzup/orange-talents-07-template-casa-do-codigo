@@ -3,7 +3,6 @@ package br.com.zup.casadocodigo.dto;
 import br.com.zup.casadocodigo.dto.annotation.EmailIsDuplicated;
 import br.com.zup.casadocodigo.entity.Autor;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -16,8 +15,8 @@ public class AutorDto {
 
 
     @NotBlank
-    @Email
     @EmailIsDuplicated
+    @Email
     private String email;
 
     @NotNull
@@ -27,7 +26,7 @@ public class AutorDto {
     public AutorDto() {
     }
 
-    public AutorDto(@Valid Autor autor) {
+    public AutorDto(Autor autor) {
         this.nome = autor.getNome();
         this.email = autor.getEmail();
         this.descricao = autor.getDescricao();

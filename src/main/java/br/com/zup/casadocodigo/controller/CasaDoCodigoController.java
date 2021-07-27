@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -22,6 +23,7 @@ public class CasaDoCodigoController{
     }
 
     @PostMapping(path = "/autores")
+    @Transactional
     public String criarAutor(@RequestBody @Valid AutorDto autorDto){
         Autor autor = autorRepository.save(autorDto.dtoParaAutor());
         return autorDto.exibirInformacous(autor);
