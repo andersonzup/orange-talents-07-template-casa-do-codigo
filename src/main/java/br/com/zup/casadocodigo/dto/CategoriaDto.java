@@ -1,6 +1,7 @@
 package br.com.zup.casadocodigo.dto;
 
 import br.com.zup.casadocodigo.dto.annotation.CategoriaIsDuplicated;
+import br.com.zup.casadocodigo.dto.annotation.ValorIsDuplicated;
 import br.com.zup.casadocodigo.entity.Categoria;
 
 import javax.validation.constraints.NotBlank;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 public class CategoriaDto {
 
     @NotBlank
-    @CategoriaIsDuplicated
+    @ValorIsDuplicated(classeDeDominio = Categoria.class, nomeCampo = "nome")
     private String nome;
 
     public CategoriaDto() {

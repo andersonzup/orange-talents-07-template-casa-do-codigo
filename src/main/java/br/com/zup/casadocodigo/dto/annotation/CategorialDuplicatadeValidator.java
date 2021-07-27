@@ -17,7 +17,7 @@ public class CategorialDuplicatadeValidator implements ConstraintValidator<Categ
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext){
-        if (categoriaRepository.existsByNome(value))
+        if (categoriaRepository.existsByName(value))
             return false;
      return true;
 

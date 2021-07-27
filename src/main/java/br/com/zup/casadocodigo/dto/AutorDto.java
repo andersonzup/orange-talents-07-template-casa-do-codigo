@@ -1,6 +1,6 @@
 package br.com.zup.casadocodigo.dto;
 
-import br.com.zup.casadocodigo.dto.annotation.EmailIsDuplicated;
+import br.com.zup.casadocodigo.dto.annotation.ValorIsDuplicated;
 import br.com.zup.casadocodigo.entity.Autor;
 
 import javax.validation.constraints.Email;
@@ -11,15 +11,18 @@ import javax.validation.constraints.Size;
 public class AutorDto {
 
     @NotBlank
+    @NotNull
     private String nome;
 
 
     @NotBlank
-    @EmailIsDuplicated
+    @NotNull
+    @ValorIsDuplicated(classeDeDominio = Autor.class, nomeCampo = "email")
     @Email
     private String email;
 
     @NotNull
+    @NotBlank
     @Size(max = 400)
     private String descricao;
 
