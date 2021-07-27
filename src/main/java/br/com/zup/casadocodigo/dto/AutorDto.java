@@ -32,11 +32,11 @@ public class AutorDto {
         this.descricao = autor.getDescricao();
     }
 
-    public String exibirInformacous(Autor autor){
+    public String messageResponseDto(Autor autor){
         return "Um autor com id " + autor.getId() + " foi criado. \n Data: " + autor.getDataCadastro();
     }
 
-    public Autor dtoParaAutor(){
+    public Autor toAutor(){
         return new Autor(nome, email, descricao);
     }
 

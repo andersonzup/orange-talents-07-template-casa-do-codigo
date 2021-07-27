@@ -1,9 +1,11 @@
 package br.com.zup.casadocodigo.controller;
 
 import br.com.zup.casadocodigo.dto.AutorDto;
+import br.com.zup.casadocodigo.dto.CategoriaDto;
 import br.com.zup.casadocodigo.entity.Autor;
+import br.com.zup.casadocodigo.entity.Categoria;
 import br.com.zup.casadocodigo.repository.AutorRepository;
-import org.springframework.validation.annotation.Validated;
+import br.com.zup.casadocodigo.repository.CategoriaRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +19,25 @@ import javax.validation.Valid;
 public class CasaDoCodigoController{
 
     AutorRepository autorRepository;
+    CategoriaRepository categoriaRepository;
 
-    public CasaDoCodigoController(AutorRepository autorRepository) {
+    public CasaDoCodigoController(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
         this.autorRepository = autorRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     @PostMapping(path = "/autores")
     @Transactional
     public String criarAutor(@RequestBody @Valid AutorDto autorDto){
-        Autor autor = autorRepository.save(autorDto.dtoParaAutor());
-        return autorDto.exibirInformacous(autor);
+        Autor autor = autorRepository.save(autorDto.toAutor());
+        return autorDto.messageResponseDto(autor);
+    }
+
+    @PostMapping(path = "/categorias")
+    @Transactional
+    public String criarCategoria(@RequestBody @Valid CategoriaDto categoriaDto){
+        Categoria categoria = categoriaRepository.save(categoriaDto.toCategoria());
+        return categoriaDto.messageResponseDto(categoria);
     }
 
 
