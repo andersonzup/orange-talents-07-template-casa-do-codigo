@@ -1,11 +1,15 @@
 package br.com.zup.casadocodigo.controller;
 
-import br.com.zup.casadocodigo.dto.LivroDto;
+import br.com.zup.casadocodigo.controller.exception.ObjectAppNotFoundException;
+import br.com.zup.casadocodigo.dto.RequestLivroDto;
 
-import br.com.zup.casadocodigo.dto.ViewLivroDto;
+import br.com.zup.casadocodigo.dto.ResponseLivroDetalhesDto;
+import br.com.zup.casadocodigo.dto.ResponseLivroListDto;
 import br.com.zup.casadocodigo.entity.Livro;
 
 import br.com.zup.casadocodigo.repository.Livrorepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -29,15 +33,22 @@ public class LivroRestController {
 
     @PostMapping
     @Transactional
-    public String cadastrarLivro(@RequestBody @Valid LivroDto livroDto){
-        Livro livro = livroDto.toModel(entityManager);
+    public String cadastrarLivro(@RequestBody @Valid RequestLivroDto requestLivroDto){
+        Livro livro = requestLivroDto.toModel(entityManager);
         livrorepository.save(livro);
         return livro.toString();
     }
 
     @GetMapping
-    public List<ViewLivroDto> livrosList(){
-        return ViewLivroDto.converter(livrorepository.findAll());
+    public Page<ResponseLivroListDto> livrosList(Pageable paginacao){
+        Page<Livro> livros = livrorepository.findAll(paginacao);
+        return ResponseLivroListDto.converter(livros);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseLivroDetalhesDto exibirDetalhesLivro(@PathVariable Long id) throws ObjectAppNotFoundException {
+        Livro livro = livrorepository.findById(id).orElseThrow(() -> new ObjectAppNotFoundException(id));
+        return new ResponseLivroDetalhesDto(livro);
     }
 
 }

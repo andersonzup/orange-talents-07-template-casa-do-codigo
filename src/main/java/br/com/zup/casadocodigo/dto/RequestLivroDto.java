@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 
-public class LivroDto {
+public class RequestLivroDto {
 
     @NotBlank
     @ValorIsDuplicated(classeDeDominio = Livro.class, nomeCampo = "titulo")
@@ -49,12 +49,12 @@ public class LivroDto {
     @ExistsId(domainClass = Autor.class, fieldName = "id")
     private Long idAutor;
 
-    public LivroDto() {
+    public RequestLivroDto() {
     }
 
-    public LivroDto(String titulo, String resumo, String sumario, double preco,
-                    int numeroPaginas, String isbn, LocalDate dataLancamento,
-                    Long idCategoria, Long idAutor) {
+    public RequestLivroDto(String titulo, String resumo, String sumario, double preco,
+                           int numeroPaginas, String isbn, LocalDate dataLancamento,
+                           Long idCategoria, Long idAutor) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -65,8 +65,8 @@ public class LivroDto {
         this.idCategoria = idCategoria;
         this.idAutor = idAutor;
     }
-    /*
-    public LivroDto(Livro livro) {
+
+    public RequestLivroDto(Livro livro) {
         this.titulo = livro.getTitulo();
         this.resumo = livro.getResumo();
         this.sumario = livro.getSumario();
@@ -77,7 +77,7 @@ public class LivroDto {
         this.idCategoria = livro.getCategoria().getId();
         this.idAutor = livro.getAutor().getId();
     }
-    */
+
     public Livro toModel(EntityManager entityManager) {
        @NotNull Categoria categoria = entityManager.find(Categoria.class, idCategoria);
        @NotNull Autor autor = entityManager.find(Autor.class, idAutor);
