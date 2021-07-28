@@ -1,6 +1,5 @@
 package br.com.zup.casadocodigo.dto;
 
-import br.com.zup.casadocodigo.dto.annotation.CategoriaIsDuplicated;
 import br.com.zup.casadocodigo.dto.annotation.ValorIsDuplicated;
 import br.com.zup.casadocodigo.entity.Categoria;
 

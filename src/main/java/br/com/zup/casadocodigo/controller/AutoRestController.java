@@ -15,30 +15,24 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1")
-public class CasaDoCodigoController{
+@RequestMapping("/api/v1/autores")
+public class AutoRestController {
 
     AutorRepository autorRepository;
-    CategoriaRepository categoriaRepository;
 
-    public CasaDoCodigoController(AutorRepository autorRepository, CategoriaRepository categoriaRepository) {
+
+    public AutoRestController(AutorRepository autorRepository) {
         this.autorRepository = autorRepository;
-        this.categoriaRepository = categoriaRepository;
+
     }
 
-    @PostMapping(path = "/autores")
+    @PostMapping
     @Transactional
     public String criarAutor(@RequestBody @Valid AutorDto autorDto){
         Autor autor = autorRepository.save(autorDto.toAutor());
         return autorDto.messageResponseDto(autor);
     }
 
-    @PostMapping(path = "/categorias")
-    @Transactional
-    public String criarCategoria(@RequestBody @Valid CategoriaDto categoriaDto){
-        Categoria categoria = categoriaRepository.save(categoriaDto.toCategoria());
-        return categoriaDto.messageResponseDto(categoria);
-    }
 
 
 

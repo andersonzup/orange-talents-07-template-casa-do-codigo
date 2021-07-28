@@ -1,9 +1,6 @@
 package br.com.zup.casadocodigo.entity;
 
-import br.com.zup.casadocodigo.dto.annotation.EmailIsDuplicated;
-
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 @Entity
