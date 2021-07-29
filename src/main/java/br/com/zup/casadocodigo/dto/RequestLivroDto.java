@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class RequestLivroDto {
 
     @NotBlank
-    @ValorIsDuplicated(classeDeDominio = Livro.class, nomeCampo = "titulo")
+    @ValorIsDuplicated(domainClass = Livro.class, fieldName = "titulo")
     private String titulo;
 
     @NotBlank
@@ -34,7 +34,7 @@ public class RequestLivroDto {
     private int numeroPaginas;
 
     @NotBlank
-    @ValorIsDuplicated(classeDeDominio = Livro.class, nomeCampo = "isbn")
+    @ValorIsDuplicated(domainClass = Livro.class, fieldName = "isbn")
     private String isbn;
 
     @Future

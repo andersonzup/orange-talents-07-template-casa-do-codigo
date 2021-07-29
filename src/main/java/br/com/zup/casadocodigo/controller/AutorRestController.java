@@ -16,12 +16,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/autores")
-public class AutoRestController {
+public class AutorRestController {
 
     AutorRepository autorRepository;
 
 
-    public AutoRestController(AutorRepository autorRepository) {
+    public AutorRestController(AutorRepository autorRepository) {
         this.autorRepository = autorRepository;
 
     }

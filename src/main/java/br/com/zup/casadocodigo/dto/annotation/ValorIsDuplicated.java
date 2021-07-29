@@ -19,7 +19,7 @@ public @interface ValorIsDuplicated {
     Class<?>[] groups() default { };
     Class<? extends Payload>[] payload() default { };
     String value() default "";
-    String nomeCampo();
-    Class<?> classeDeDominio();
+    String fieldName();
+    Class<?> domainClass();
 
 }

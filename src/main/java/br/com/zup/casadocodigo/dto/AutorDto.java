@@ -17,7 +17,7 @@ public class AutorDto {
 
     @NotBlank
     @NotNull
-    @ValorIsDuplicated(classeDeDominio = Autor.class, nomeCampo = "email")
+    @ValorIsDuplicated(domainClass = Autor.class, fieldName = "email")
     @Email
     private String email;
 

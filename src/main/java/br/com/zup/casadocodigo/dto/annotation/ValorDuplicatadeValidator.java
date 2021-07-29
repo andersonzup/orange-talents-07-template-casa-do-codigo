@@ -21,8 +21,8 @@ public class ValorDuplicatadeValidator implements ConstraintValidator<ValorIsDup
 
     @Override
     public void initialize(ValorIsDuplicated parametros) {
-        atributos = parametros.nomeCampo();
-        dClass = parametros.classeDeDominio();
+        atributos = parametros.fieldName();
+        dClass = parametros.domainClass();
 
     }
 

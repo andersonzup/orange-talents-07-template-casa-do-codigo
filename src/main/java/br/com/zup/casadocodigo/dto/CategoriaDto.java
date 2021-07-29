@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class CategoriaDto {
 
     @NotBlank
-    @ValorIsDuplicated(classeDeDominio = Categoria.class, nomeCampo = "nome")
+    @ValorIsDuplicated(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
     public CategoriaDto() {
