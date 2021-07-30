@@ -16,4 +16,8 @@ public interface EstadoRepository extends JpaRepository<Estado, Long> {
     List<Estado> findAllByPaisId(Long idPais);
 
     boolean existsByNomeAndPais_Id(String nome, Long idPais);
+
+    boolean existsByPais_Id(Long idPais);
+
+    boolean existsByIdAndPais_Id(Long idEstado, Long idPais);
 }

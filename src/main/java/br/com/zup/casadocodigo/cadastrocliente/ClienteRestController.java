@@ -1,9 +1,8 @@
 package br.com.zup.casadocodigo.cadastrocliente;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import br.com.zup.casadocodigo.config.validacao.EstadoCadastradoValidator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,19 +13,30 @@ import javax.validation.Valid;
 @RequestMapping(path = "/api/v1/clientes")
 public class ClienteRestController {
 
-    ClienteRepository clienteRepository;
+    private ClienteRepository clienteRepository;
 
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
-    public ClienteRestController(ClienteRepository clienteRepository) {
+    private EstadoCadastradoValidator estadoCadastradoValidator;
+
+    public ClienteRestController(ClienteRepository clienteRepository, EstadoCadastradoValidator estadoCadastradoValidator) {
         this.clienteRepository = clienteRepository;
+        this.estadoCadastradoValidator = estadoCadastradoValidator;
+    }
+
+    @InitBinder
+    public void init(WebDataBinder binder){
+        binder.addValidators(estadoCadastradoValidator);
     }
 
     @PostMapping
     @Transactional
-    public Cliente saveClient(@RequestBody @Valid RequestClientDto requestClientDto){
+    public String saveClient(@RequestBody @Valid RequestClientDto requestClientDto){
         Cliente cliente = requestClientDto.toModel(entityManager);
-        return cliente;
+        clienteRepository.save(cliente);
+        return "Cliente salvo com id: " + cliente.getId();
     }
+
+
 }

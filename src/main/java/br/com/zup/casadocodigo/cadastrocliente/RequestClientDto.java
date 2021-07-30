@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 public class RequestClientDto {
 
@@ -38,7 +39,6 @@ public class RequestClientDto {
     private Long idPais;
 
 
-    @ExistsId(domainClass = Estado.class, fieldName = "id")
     private Long idEstado; //estado(caso aquele pais tenha estado) - apenas se o país tiver cadastro de estados
 
     @NotBlank
@@ -66,7 +66,7 @@ public class RequestClientDto {
 
     public Cliente toModel(EntityManager entityManager){
         @NotNull Pais pais = entityManager.find(Pais.class, idPais);
-        @NotNull Estado estado = entityManager.find(Estado.class, idEstado);
+                Estado estado = entityManager.find(Estado.class, idEstado);
         return new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, pais, estado, telefone,cep);
     }
 
@@ -118,5 +118,18 @@ public class RequestClientDto {
 
     public String getCep() {
         return cep;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RequestClientDto)) return false;
+        RequestClientDto that = (RequestClientDto) o;
+        return Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getNome(), that.getNome()) && Objects.equals(getSobrenome(), that.getSobrenome()) && Objects.equals(getDocumento(), that.getDocumento()) && Objects.equals(getEndereco(), that.getEndereco()) && Objects.equals(getComplemento(), that.getComplemento()) && Objects.equals(getCidade(), that.getCidade()) && Objects.equals(getIdPais(), that.getIdPais()) && Objects.equals(getIdEstado(), that.getIdEstado()) && Objects.equals(getTelefone(), that.getTelefone()) && Objects.equals(getCep(), that.getCep());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmail(), getNome(), getSobrenome(), getDocumento(), getEndereco(), getComplemento(), getCidade(), getIdPais(), getIdEstado(), getTelefone(), getCep());
     }
 }

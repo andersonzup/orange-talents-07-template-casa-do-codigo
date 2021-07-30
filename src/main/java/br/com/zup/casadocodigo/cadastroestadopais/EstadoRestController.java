@@ -13,7 +13,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/v1/estados")
 public class EstadoRestController {
 
-    EstadoRepository estadoRepository;
+    private EstadoRepository estadoRepository;
 
     private ProibeEstadoDuplicadoValidator proibeEstadoDuplicadoValidator;
 

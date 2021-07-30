@@ -12,10 +12,8 @@ import javax.persistence.PersistenceContext;
 
 @Component
 public class ProibeEstadoDuplicadoValidator implements Validator {
-    @PersistenceContext
-    EntityManager entityManager;
 
-    EstadoRepository repository;
+    private EstadoRepository repository;
     public ProibeEstadoDuplicadoValidator(EstadoRepository repository) {
         this.repository = repository;
     }
