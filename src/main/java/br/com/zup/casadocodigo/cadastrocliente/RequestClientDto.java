@@ -1,6 +1,7 @@
 package br.com.zup.casadocodigo.cadastrocliente;
 
 
+import br.com.zup.casadocodigo.config.annotation.CPFOrCNPJ;
 import br.com.zup.casadocodigo.config.annotation.ExistsId;
 import br.com.zup.casadocodigo.config.annotation.ValorIsDuplicated;
 import br.com.zup.casadocodigo.cadastroestadopais.Estado;
@@ -22,6 +23,7 @@ public class RequestClientDto {
     @NotBlank
     private String sobrenome;
 
+    @CPFOrCNPJ
     @NotBlank @ValorIsDuplicated(domainClass = Cliente.class, fieldName ="documento")
     private String documento;
 
